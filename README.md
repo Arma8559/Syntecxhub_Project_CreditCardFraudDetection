@@ -1,272 +1,236 @@
-# FraudSense — Credit Card Fraud Detection
+# 🛡️ Syntecxhub_Project_CreditCardFraudDetection - Real-Time Fraud Checks Made Simple
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Flask-3.0-black?style=for-the-badge&logo=flask&logoColor=white"/>
-  <img src="https://img.shields.io/badge/scikit--learn-1.3%2B-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white"/>
-  <img src="https://img.shields.io/badge/XGBoost-1.7%2B-FF6600?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/SMOTE-Oversampling-8A2BE2?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge"/>
-</p>
+[![Download](https://img.shields.io/badge/Download-Project%20Page-blue?style=for-the-badge&logo=github)](https://github.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection)
 
-<p align="center">
-  <strong>Syntecxhub ML Internship </strong>
-</p>
+## 📥 Download
 
-> An end-to-end machine learning system for detecting fraudulent credit card transactions. Includes a full ML training pipeline (EDA → SMOTE → Random Forest + XGBoost) and a dark-themed interactive Flask web application for real-time predictions.
+Visit this page to download and run the app on Windows:
 
----
+https://github.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection
 
-## Live Demo
+## 🧾 What this app does
 
-Run locally → open `http://127.0.0.1:5000` after following the setup steps below.
+Syntecxhub_Project_CreditCardFraudDetection is a web app that checks credit card transactions for fraud. It uses machine learning models built with Random Forest and XGBoost. It also uses SMOTE to handle imbalanced data, so the app can learn from rare fraud cases.
 
----
+You can open the web page, enter transaction details, and get a fraud prediction in real time. The app runs through Flask, so it works in a browser on your Windows PC.
 
-## Overview
+## 🖥️ What you need
 
-Credit card fraud costs the global economy billions of dollars annually. This project tackles the challenge of detecting fraud from a **highly imbalanced dataset** (only 0.172% fraud) using proven ML techniques and presents results through an intuitive web interface.
+Use a Windows computer with:
 
-**Key challenge:** Standard accuracy is misleading — a model predicting "Normal" for everything achieves 99.83% accuracy but catches zero frauds. This project uses **Precision, Recall, ROC-AUC, and F1** as meaningful metrics, with **SMOTE** to handle class imbalance.
+- A stable internet connection
+- A modern web browser like Chrome, Edge, or Firefox
+- Enough free disk space for the project files
+- Python installed if you plan to run the source code
+- Git if you want to clone the repository
 
----
+If you only want to open the app from the project page, you do not need to know how to code.
 
-## Project Architecture
+## 🚀 Getting Started
 
-```
-Two-layer system:
+Follow these steps to set up the project on Windows.
 
-Layer 1 — ML Pipeline (run once)
-  creditcard.csv → EDA → Scale → SMOTE → Train RF + XGBoost → Save .pkl
+### 1. Open the project page
 
-Layer 2 — Web App (run anytime after Layer 1)
-  Browser (index.html) → POST /predict → Flask (app.py) → .pkl model → JSON verdict
-```
+Go to:
 
-### Full Project Structure
+https://github.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection
 
-```
-Syntecxhub_Project_CreditCardFraudDetection/
-│
-├── data/
-│   └── creditcard.csv              ← Download from Kaggle (not in Git)
-│
-├── src/
-│   ├── __init__.py
-│   ├── data_loader.py              ← CSV loading and feature extraction
-│   ├── eda.py                      ← 5 EDA plots with statistical summary
-│   ├── preprocessing.py            ← StandardScaler + train/test split + SMOTE
-│   ├── model.py                    ← Random Forest and XGBoost training
-│   └── evaluate.py                 ← Metrics, ROC, PR curves, threshold analysis
-│
-├── templates/
-│   └── index.html                  ← Flask web app frontend (dark fintech UI)
-│
-├── outputs/
-│   ├── plots/                      ← 10 PNG plots auto-generated
-│   ├── models/                     ← Trained model .pkl files
-│   └── reports/                    ← model_comparison.csv
-│
-├── main.py                         ← ML pipeline entry point
-├── app.py                          ← Flask web server
-├── requirements.txt
-├── .gitignore
-├── LICENSE
-└── README.md
-```
+From there, download the files or clone the repository to your computer.
 
----
+### 2. Download the files
 
-## Dataset
+If you see a ZIP file option, download it and save it to your Downloads folder.
 
-| Property | Value |
-|---|---|
-| Source | [Kaggle — Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) |
-| Transactions | 284,807 |
-| Features | 30 (Time, V1–V28 via PCA, Amount) |
-| Target | `Class` — 0 = Normal, 1 = Fraud |
-| Fraud rate | 0.172% — 492 fraud cases |
-| Missing values | None |
-
-> The dataset is not included due to size. Download `creditcard.csv` from Kaggle and place it in `data/`.
-
----
-
-## ML Pipeline — What Happens in `main.py`
-
-### Step 1 — EDA (5 plots)
-- Class imbalance visualization (bar + pie)
-- Transaction amount distribution by class
-- Temporal distribution across 48-hour window
-- Full feature correlation heatmap (30×30)
-- V1–V14 boxplots: Normal vs Fraud comparison
-
-### Step 2 — Preprocessing
-- `StandardScaler` applied to `Time` and `Amount` (V1–V28 are already PCA-scaled)
-- 80/20 stratified train/test split
-- **SMOTE** applied only to training set → balances from 227,451 vs 394 to 1:1
-
-### Step 3 — Model Training
-
-**Random Forest**
-- 200 estimators, max_depth=12, class_weight='balanced'
-- Ensemble of decision trees via majority vote
-
-**XGBoost**
-- 200 estimators, learning_rate=0.05, scale_pos_weight for imbalance
-- Sequential gradient boosting — each tree corrects previous errors
-
-### Step 4 — Evaluation (per model)
-- Confusion matrix (TN, FP, FN, TP)
-- ROC Curve with AUC score
-- Precision-Recall Curve with Average Precision
-- Threshold Analysis — F1/Precision/Recall across all decision thresholds
-
----
-
-## Web App — What Happens in `app.py`
-
-| Route | Method | Description |
-|---|---|---|
-| `/` | GET | Serves the main prediction UI |
-| `/predict` | POST | Accepts feature JSON, returns verdict from both models |
-| `/model_status` | GET | Returns whether RF and XGBoost are loaded |
-
-The frontend sends transaction features as JSON. Flask loads the saved `.pkl` models, runs `predict_proba()`, and returns fraud probability and verdict for both models. The browser renders the result with confidence bars and per-model breakdown.
-
----
-
-## Why These Evaluation Metrics?
-
-| Metric | Why it matters for fraud |
-|---|---|
-| **Recall** | Are we catching actual frauds? Missing a fraud = financial loss |
-| **Precision** | Are our fraud flags real? Too many false alarms = bad UX |
-| **ROC-AUC** | Overall discrimination ability across all thresholds |
-| **F1-Score** | Harmonic mean — balances Precision and Recall |
-| **Threshold Analysis** | Business teams can tune the operating point |
-
-A model that only predicts "Normal" gets 99.83% accuracy — but 0% Recall. That is why accuracy is never used here.
-
----
-
-## Installation and Setup
-
-### 1. Clone the repository
+If you use Git, clone the repository with:
 
 ```bash
-git clone https://github.com/<your-username>/Syntecxhub_Project_CreditCardFraudDetection.git
-cd Syntecxhub_Project_CreditCardFraudDetection
+git clone https://github.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection.git
 ```
 
-### 2. Create and activate virtual environment
+### 3. Extract the folder
 
-```bash
-python -m venv venv
+If you downloaded a ZIP file:
 
-# Windows
-venv\Scripts\activate
+- Find the ZIP file in your Downloads folder
+- Right-click it
+- Select Extract All
+- Choose a folder you can find again, مثل Desktop or Documents
 
-# macOS / Linux
-source venv/bin/activate
-```
+### 4. Open the project folder
 
-### 3. Install dependencies
+Open the extracted folder named:
+
+Syntecxhub_Project_CreditCardFraudDetection
+
+Look for files that help run the app, such as:
+
+- app.py
+- requirements.txt
+- model files
+- templates folder
+- static folder
+
+### 5. Install Python
+
+If Python is not on your computer:
+
+- Go to the official Python website
+- Download the latest Windows version
+- Install it
+- During setup, check Add Python to PATH
+
+This lets Windows find Python from the command line.
+
+### 6. Open Command Prompt
+
+Do this in the project folder:
+
+- Hold Shift
+- Right-click inside the folder
+- Select Open PowerShell window here or Open in Terminal
+
+This opens a command window in the right place.
+
+### 7. Install the project tools
+
+Type this command and press Enter:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Download dataset
+This installs the tools the app needs, such as Flask, scikit-learn, XGBoost, pandas, and joblib.
 
-Download `creditcard.csv` from [Kaggle](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) and place it at `data/creditcard.csv`.
-
----
-
-## Running the Project
-
-### Step 1 — Train the ML models (run once)
+If the project does not include a requirements file, install common packages with:
 
 ```bash
-python main.py
+pip install flask pandas scikit-learn xgboost imbalanced-learn joblib numpy
 ```
 
-This will:
-- Generate 10 EDA and evaluation plots in `outputs/plots/`
-- Save `random_forest.pkl` and `xgboost.pkl` in `outputs/models/`
-- Save `model_comparison.csv` in `outputs/reports/`
-- Print full evaluation metrics to terminal
+### 8. Start the app
 
-Estimated runtime: 3–7 minutes depending on hardware.
-
-### Step 2 — Launch the web app
+Run the main file:
 
 ```bash
 python app.py
 ```
 
-Open your browser and go to: **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
+If the project uses a different file name, open the folder and look for the main Python file, then run it with Python.
 
-> `main.py` must be run at least once before `app.py` — the web app needs the saved `.pkl` model files.
+### 9. Open the app in your browser
 
----
+After the app starts, the terminal will show a local address such as:
 
-## Testing the Web App
+```bash
+http://127.0.0.1:5000
+```
 
-### Normal transaction
-- Amount: `150`, all V sliders at center → Expected: `LEGITIMATE`
+Copy that address and paste it into your browser.
 
-### Fraud transaction (preset)
-- Click **"Suspicious Pattern"** preset
-- V1=−4.77, V3=−5.03, V14=−6.1, Amount=$1.00
-- Expected: `FRAUD` with high probability
+## 🧭 How to use the app
 
-### Manual fraud pattern
-- Amount: `0.01–5.00` (very small)
-- V1, V3, V14 sliders: drag to far left (−10)
-- Watch fraud probability increase
+Use the form on the web page to enter transaction values.
 
----
+Typical inputs may include:
 
-## Output Files Generated
+- Transaction amount
+- Time-related values
+- Transaction pattern data
+- Other numeric fields used by the model
 
-| File | Description |
-|---|---|
-| `01_class_distribution.png` | Class imbalance bar and pie chart |
-| `02_amount_distribution.png` | Amount histogram by class |
-| `03_time_distribution.png` | Temporal distribution |
-| `04_correlation_heatmap.png` | 30-feature correlation matrix |
-| `05_feature_boxplots.png` | V1–V14 Normal vs Fraud |
-| `06_confusion_matrix_*.png` | Per-model confusion matrix |
-| `07_roc_curve_*.png` | ROC curve with AUC |
-| `08_precision_recall_*.png` | Precision-Recall curve |
-| `09_threshold_analysis_*.png` | Business threshold analysis |
-| `10_model_comparison.png` | Side-by-side metric comparison |
-| `model_comparison.csv` | Final metrics table |
+Then click the button to check the result.
 
----
+The app will show whether the transaction looks normal or suspicious based on the model output.
 
-## Tech Stack
+## 🧠 How it works
 
-| Category | Tools |
-|---|---|
-| Language | Python 3.8+ |
-| Web Framework | Flask 3.0 |
-| ML Models | scikit-learn (Random Forest), XGBoost |
-| Imbalance Handling | imbalanced-learn (SMOTE) |
-| Data Processing | pandas, numpy |
-| Visualization | matplotlib, seaborn |
-| Model Persistence | joblib |
+The app uses a few parts that work together:
 
----
+- **Flask** serves the web page
+- **Random Forest** helps make the prediction
+- **XGBoost** gives another model for fraud checks
+- **SMOTE** helps balance the training data
+- **scikit-learn** handles model training and prediction
 
-## Author
-**Rafiul Islam**
+This setup helps the app work with fraud data, which often has far fewer fraud cases than normal cases.
 
-IoT & Robotics Engineering
+## 📁 Project Files
 
-University of Frontier Technology Bangladesh (UFTB) 
+You may see these files and folders in the project:
 
-Syntecxhub ML Internship
+- **app.py**: starts the web app
+- **model files**: saved fraud detection models
+- **templates/**: HTML pages for the browser
+- **static/**: CSS, images, and other web files
+- **requirements.txt**: package list for Python
+- **README.md**: project notes
 
----
+## 🔧 Common Windows Setup Steps
+
+### If Python is not recognized
+
+If you see an error like Python is not recognized, close Command Prompt and reopen it after installing Python.
+
+Then try:
+
+```bash
+python --version
+```
+
+If that shows a Python version, the install worked.
+
+### If pip does not work
+
+Try:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+This uses Python directly to install the packages.
+
+### If the browser does not open
+
+Open your browser yourself and enter the local address shown in the terminal.
+
+## 🛠️ Troubleshooting
+
+### The app closes right away
+
+Check whether you started the correct Python file.
+
+### A package install fails
+
+Run the install command again with a stable internet connection.
+
+### The page shows an error
+
+Make sure all project files are in the same folder and none are missing.
+
+### The model does not load
+
+Check that the model files stayed in the project folder after extraction.
+
+## 📌 Main Features
+
+- Real-time fraud prediction in a browser
+- Uses Random Forest and XGBoost
+- Handles imbalanced fraud data with SMOTE
+- Simple Flask web interface
+- Built for quick checks on Windows
+- Suitable for local use from your own PC
+
+## 🧪 Example Use Case
+
+A user enters transaction details into the form on the web page. The app sends the values to the model. The model then returns a fraud result. This helps the user check a transaction before taking action.
+
+## 🔗 Direct Access
+
+Project page and download path:
+
+https://github.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection
+
+## 📚 Topics
+
+credit-card-fraud-detection, data, flask, fraud-detection, imbalanced-learning, machine-learning, python, random-forest, scikit-learn, smote, xgboost
